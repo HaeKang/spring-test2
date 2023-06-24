@@ -2,8 +2,7 @@ package hello.springmvc.basic.request;
 
 import hello.springmvc.basic.HelloData;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +25,8 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-v2")
-    public void requestParamV2(@RequestParam("username") String memberName,
-                               @RequsetParam("age") int memberAge) {
+    public String requestParamV2(@RequestParam("username") String memberName,
+                               @RequestParam("age") int memberAge) {
         log.info("username = {}, user age = {}", memberName, memberAge);
 
         return "ok";
@@ -35,8 +34,8 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-v3")
-    public void requestParamV3(@RequestParam String username,
-                               @RequsetParam int age) {
+    public String requestParamV3(@RequestParam String username,
+                               @RequestParam int age) {
         log.info("username = {}, user age = {}", username, age);
 
         return "ok";
@@ -45,7 +44,7 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-v4")
-    public void requestParamV4(String username, int age) {
+    public String requestParamV4(String username, int age) {
         log.info("username = {}, user age = {}", username, age);
 
         return "ok";
@@ -53,7 +52,7 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-required")
-    public void requestParamRequired(@RequestParam(required = true) String username,
+    public String requestParamRequired(@RequestParam(required = true) String username,
                                      @RequestParam(required = false) Integer age) {
         log.info("username = {}, user age = {}", username, age);
 
@@ -62,7 +61,7 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-default")
-    public void requestParamRequired(@RequestParam(required = true, defaultValue = "guest") String username,
+    public String requestParamDefault(@RequestParam(required = true, defaultValue = "guest") String username,
                                      @RequestParam(required = false, defaultValue = "-1") Integer age) {
         log.info("username = {}, user age = {}", username, age);
 
@@ -71,7 +70,7 @@ public class RequestParamController {
 
     @ResponseBody
     @RequestMapping("/request-param-map")
-    public void requestParamMap(@RequestParam Map<String, Object> paramMap) {
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
 
         log.info("username = {}, user age = {}", paramMap.get("username"), paramMap.get("age"));
 
@@ -86,15 +85,18 @@ public class RequestParamController {
 //        helloData.setUsername(username);
 //        helloData.setAge(age);
 //
-        log.info('hello data username = {}, age = {}', helloData.getUsername(), helloData.getAge())
+        log.info("hello data username = {}, age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
 
     @ResponseBody
     @RequestMapping("/model-attribute-v2")
     public String modelAttributeV2(HelloData helloData) {
-        log.info('hello data username = {}, age = {}', helloData.getUsername(), helloData.getAge())
+        log.info("hello data username = {}, age = {}", helloData.getUsername(), helloData.getAge());
         return "ok";
     }
+
+
+
 
 }
